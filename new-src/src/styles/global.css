@@ -1,30 +1,48 @@
 :root {
   color-scheme: light dark;
 
-  /* Palette derived from Image 1 — clean cartographer aesthetic */
-  --boundary: #0a3d8f;          /* strong navy, like admin boundaries on a plan */
-  --water: #d4e2ef;             /* pale blue of lakes */
-  --paper: #faf9f6;             /* warm near-white, like fine printing paper */
-  --ink: #1a1a1a;               /* near-black body text */
-  --muted: #6b6b75;             /* map place-name grey */
-  --border: #dcd8cf;            /* warm hairline */
+  /* Core palette — Image 1 (clean) */
+  --boundary: #0a3d8f;          /* navy admin boundary */
+  --water: #cfe0ef;              /* lake blue */
+  --paper: #faf9f6;              /* warm near-white */
+  --ink: #1a1a1a;                /* body ink */
+  --muted: #6b6b75;              /* map place-name grey */
+  --border: #dcd8cf;             /* warm hairline */
+
+  /* Accent palette — Image 2 (kaavakartta zoning) */
+  --zone-m: #efe3a3;             /* M — forest/nature yellow */
+  --zone-ra: #f8ead2;             /* RA — holiday residence cream */
+  --zone-sm: #d34851;             /* SM — cultural site red */
+  --zone-eo: #e8a5a0;             /* EO — extraction pink */
+  --zone-luo: #b95d52;            /* luo — ecological connection red-brown */
+  --zone-hatch: #8b6f47;          /* cross-hatch brown */
+
+  /* Semantic aliases */
   --accent: var(--boundary);
-  --max-width: 48rem;
+  --accent-warm: var(--zone-sm);
+  --accent-soft: var(--zone-ra);
+
+  --max-width: 52rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #0f1115;
-    --ink: #e8e8e8;
+    --paper: #10131a;
+    --ink: #ebeae5;
     --muted: #9a9aa2;
-    --border: #2a2d33;
-    --water: #1e2a38;
-    --boundary: #7aa5e8;
+    --border: #2b2f38;
+    --water: #1c2838;
+    --boundary: #8bb0ea;
+    --zone-m: #5a522a;
+    --zone-ra: #3d3426;
+    --zone-sm: #d45a62;
+    --zone-eo: #8d4844;
+    --zone-luo: #a6554a;
+    --zone-hatch: #6e5a3d;
   }
 }
 
 * { box-sizing: border-box; }
-
 html, body { background: var(--paper); }
 
 body {
@@ -43,7 +61,24 @@ h1, h2, h3 {
   letter-spacing: -0.01em;
 }
 h1 { font-size: 2.75rem; margin: 0 0 0.5rem; }
-h2 { font-size: 1.55rem; margin: 2.75rem 0 0.5rem; }
+h2 {
+  font-size: 1.7rem;
+  margin: 3rem 0 0.75rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--accent-warm);
+  border: 2px solid var(--boundary);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transform: translateY(-0.15em);
+}
 h3 { font-size: 1.2rem; margin: 1.75rem 0 0.5rem; }
 
 p { margin: 0.75rem 0; }
@@ -58,10 +93,28 @@ a {
 a:hover {
   text-decoration-style: solid;
   text-decoration-thickness: 2px;
+  color: var(--accent-warm);
 }
 
-ul, ol { padding-left: 1.25rem; }
-li { margin: 0.3rem 0; }
+ul, ol { padding-left: 1.5rem; }
+ul li {
+  position: relative;
+  margin: 0.35rem 0;
+  list-style: none;
+}
+ul li::before {
+  content: "";
+  position: absolute;
+  left: -1.25rem;
+  top: 0.65em;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--accent-warm);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--boundary);
+}
+ol { padding-left: 1.25rem; }
+ol li { margin: 0.3rem 0; }
 
 /* ---- Navigation ---- */
 nav {
@@ -69,7 +122,7 @@ nav {
   gap: 1.5rem;
   flex-wrap: wrap;
   padding-bottom: 1.25rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0;
   border-bottom: 1px dashed var(--border);
   font-size: 0.95rem;
   letter-spacing: 0.01em;
@@ -77,23 +130,28 @@ nav {
 nav a {
   color: var(--ink);
   text-decoration: none;
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid transparent;
 }
-nav a:hover { color: var(--boundary); }
-nav a[aria-current="page"] { color: var(--boundary); }
+nav a:hover {
+  color: var(--boundary);
+  border-bottom-color: var(--accent-warm);
+}
 nav strong {
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 600;
   letter-spacing: 0;
+  font-size: 1.05rem;
 }
 
-/* ---- Hero (homepage) ---- */
+/* ---- Hero ---- */
 .hero {
   position: relative;
-  margin: -2rem -1.5rem 3rem;
-  padding: 5rem 1.5rem 6rem;
-  text-align: left;
+  margin: 1.5rem -1.5rem 3rem;
+  padding: 5rem 1.5rem 6.5rem;
   overflow: hidden;
   isolation: isolate;
+  border-top: 3px solid var(--boundary);
   border-bottom: 1px dashed var(--border);
 }
 .hero::before {
@@ -102,79 +160,199 @@ nav strong {
   inset: 0;
   background-image: url("/plandisain-site/new/kyrsya-map.jpg");
   background-size: cover;
-  background-position: center 40%;
-  opacity: 0.35;
+  background-position: center 38%;
+  opacity: 0.55;
   z-index: -2;
-  filter: saturate(0.85);
+  filter: saturate(1.05) contrast(1.02);
 }
 .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 30%, rgba(211, 72, 81, 0.08), transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(239, 227, 163, 0.25), transparent 50%),
+    linear-gradient(180deg, rgba(250, 249, 246, 0.15) 0%, rgba(250, 249, 246, 0.65) 60%, rgba(250, 249, 246, 0.98) 100%);
+  z-index: -1;
+}
+@media (prefers-color-scheme: dark) {
+  .hero::before { opacity: 0.35; }
+  .hero::after {
+    background:
+      radial-gradient(circle at 85% 30%, rgba(211, 72, 81, 0.12), transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(239, 227, 163, 0.08), transparent 50%),
+      linear-gradient(180deg, rgba(16, 19, 26, 0.3) 0%, rgba(16, 19, 26, 0.75) 60%, rgba(16, 19, 26, 1) 100%);
+  }
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  background: var(--paper);
+  padding: 0.3rem 0.75rem;
+  border: 1px dashed var(--accent-warm);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  margin: 0 0 1rem;
+  max-width: 15ch;
+  color: var(--ink);
+  text-shadow: 0 1px 0 var(--paper);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--boundary);
+}
+.hero .tagline {
+  font-size: 1.15rem;
+  color: var(--ink);
+  max-width: 44ch;
+  margin: 0 0 2rem;
+  letter-spacing: 0.005em;
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+  backdrop-filter: blur(2px);
+  padding: 0.25rem 0;
+}
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.hero-stats > div strong {
+  display: block;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.75rem;
+  color: var(--boundary);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+.hero .caption {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 1.25rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Service cards ---- */
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 3rem;
+}
+.service {
+  position: relative;
+  padding: 1.5rem 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--zone-color, var(--boundary));
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--zone-tint, var(--water)) 35%, var(--paper));
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.service:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px rgba(10, 61, 143, 0.25);
+}
+.service .code {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--zone-color, var(--boundary));
+  opacity: 0.7;
+}
+.service h3 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.15rem;
+}
+.service p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.service--kaavoitus { --zone-color: var(--boundary); --zone-tint: var(--water); }
+.service--digitalisaatio { --zone-color: #b6831a; --zone-tint: var(--zone-m); }
+.service--vuorovaikutus { --zone-color: var(--zone-sm); --zone-tint: var(--zone-eo); }
+
+/* ---- Detail band showing the technical kaavakartta ---- */
+.detail-band {
+  position: relative;
+  margin: 3rem -1.5rem;
+  padding: 3rem 1.5rem;
+  overflow: hidden;
+  background: var(--paper);
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+}
+.detail-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/plandisain-site/new/kaavakartta-detail.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.85;
+  z-index: -2;
+}
+.detail-band::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
     rgba(250, 249, 246, 0.55) 0%,
-    rgba(250, 249, 246, 0.75) 55%,
-    rgba(250, 249, 246, 1) 100%
+    rgba(250, 249, 246, 0.25) 50%,
+    rgba(250, 249, 246, 0.8) 100%
   );
   z-index: -1;
 }
+.detail-band .detail-quote {
+  max-width: 34ch;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.35;
+  color: var(--ink);
+  background: var(--paper);
+  border-left: 3px solid var(--accent-warm);
+  padding: 1rem 1.25rem;
+  margin: 0;
+}
+.detail-band .detail-cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
 @media (prefers-color-scheme: dark) {
-  .hero::before { opacity: 0.18; }
-  .hero::after {
+  .detail-band::before { opacity: 0.45; filter: saturate(0.9); }
+  .detail-band::after {
     background: linear-gradient(
       180deg,
-      rgba(15, 17, 21, 0.5) 0%,
-      rgba(15, 17, 21, 0.8) 55%,
-      rgba(15, 17, 21, 1) 100%
+      rgba(16, 19, 26, 0.6) 0%,
+      rgba(16, 19, 26, 0.3) 50%,
+      rgba(16, 19, 26, 0.85) 100%
     );
   }
-}
-.hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  margin: 0 0 0.75rem;
-  max-width: 18ch;
-}
-.hero .tagline {
-  font-size: 1.1rem;
-  color: var(--muted);
-  max-width: 42ch;
-  margin: 0;
-  letter-spacing: 0.02em;
-}
-.hero .caption {
-  position: absolute;
-  bottom: 0.75rem;
-  right: 1.25rem;
-  font-size: 0.72rem;
-  color: var(--muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  opacity: 0.6;
-  letter-spacing: 0.04em;
-}
-
-/* ---- Service blocks on homepage ---- */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1.25rem;
-  margin: 2rem 0 2.5rem;
-}
-.service {
-  padding: 1.25rem 1.25rem 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--water) 25%, var(--paper));
-}
-.service h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.1rem;
-}
-.service p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.55;
 }
 
 /* ---- Footer ---- */

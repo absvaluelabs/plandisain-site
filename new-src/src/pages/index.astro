@@ -4,24 +4,33 @@ const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Koti" description="PlanDisain — kaavoitus, maankäytön digitalisaatio, vuorovaikutus">
   <section class="hero">
-    <h1>Kaavoitus.<br/>Selkeästi.</h1>
+    <span class="hero-eyebrow">PlanDisain Oy · Est. 2020</span>
+    <h1>Kaavoitus.<br/><em>Selkeästi.</em></h1>
     <p class="tagline">
       Maankäytönsuunnittelun asiantuntijapalvelua koko Suomessa —
       kaavoitus, maankäytön digitalisaatio ja vuorovaikutus.
     </p>
-    <span class="caption">Kyrsyä · 2024</span>
+    <div class="hero-stats">
+      <div><strong>50+</strong>kaavaprojektia</div>
+      <div><strong>30+</strong>kuntaa</div>
+      <div><strong>3</strong>palvelulinjaa</div>
+    </div>
+    <span class="caption">Kyrsyä · yleiskaava-alue</span>
   </section>
 
   <section class="services">
-    <article class="service">
+    <article class="service service--kaavoitus">
+      <span class="code">SM/1 — Kaavoitus</span>
       <h3>Kaavoitus</h3>
       <p>Kaavoitusprosessit läpi sujuvasti, havainnollisesti ja vuorovaikutteisesti — yli 50 kaavaprojektia 30+ kunnassa.</p>
     </article>
-    <article class="service">
+    <article class="service service--digitalisaatio">
+      <span class="code">luo-2 — Digital</span>
       <h3>Maankäytön digitalisaatio</h3>
       <p>Kaavoituksen modernisointi ja digitaalisten maankäyttöratkaisujen toteutus.</p>
     </article>
-    <article class="service">
+    <article class="service service--vuorovaikutus">
+      <span class="code">RA — Vuorovaikutus</span>
       <h3>Vuorovaikutus</h3>
       <p>Osallistumisen parantaminen digitaalisten alustojen ja selkeän viestinnän kautta.</p>
     </article>
@@ -36,5 +45,20 @@ const base = import.meta.env.BASE_URL;
   <p>
     Lue lisää <a href={`${base}yritysesittely/`}>yrityksestä</a> tai tutustu
     <a href={`${base}referenssit/`}>referensseihin</a>.
+  </p>
+
+  <section class="detail-band">
+    <blockquote class="detail-quote">
+      Tavoitteena on tarjota laadukasta vahvaan asiantuntijuuteen
+      perustuvaa luotettavaa maankäytön suunnittelua.
+      <span class="detail-cite">— PlanDisain tavoitteet</span>
+    </blockquote>
+  </section>
+
+  <h2>Ajankohtaista</h2>
+  <p>
+    Tutustu käynnissä oleviin
+    <a href={`${base}projektit/`}>projekteihin</a> tai ota suoraan
+    <a href={`${base}yhteystiedot/`}>yhteyttä</a>.
   </p>
 </BaseLayout>
