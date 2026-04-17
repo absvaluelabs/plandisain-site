@@ -1,22 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Koti" description="PlanDisain — kaavoitus, maankäytön digitalisaatio, vuorovaikutus">
-  <h1>PlanDisain</h1>
-  <p><em>Kaavoitus · Maankäytön digitalisaatio · Vuorovaikutus</em></p>
+  <section class="hero">
+    <h1>Kaavoitus.<br/>Selkeästi.</h1>
+    <p class="tagline">
+      Maankäytönsuunnittelun asiantuntijapalvelua koko Suomessa —
+      kaavoitus, maankäytön digitalisaatio ja vuorovaikutus.
+    </p>
+    <span class="caption">Kyrsyä · 2024</span>
+  </section>
 
+  <section class="services">
+    <article class="service">
+      <h3>Kaavoitus</h3>
+      <p>Kaavoitusprosessit läpi sujuvasti, havainnollisesti ja vuorovaikutteisesti — yli 50 kaavaprojektia 30+ kunnassa.</p>
+    </article>
+    <article class="service">
+      <h3>Maankäytön digitalisaatio</h3>
+      <p>Kaavoituksen modernisointi ja digitaalisten maankäyttöratkaisujen toteutus.</p>
+    </article>
+    <article class="service">
+      <h3>Vuorovaikutus</h3>
+      <p>Osallistumisen parantaminen digitaalisten alustojen ja selkeän viestinnän kautta.</p>
+    </article>
+  </section>
+
+  <h2>PlanDisain?</h2>
   <p>
     PlanDisain Oy on vuonna 2020 perustettu suomalainen yritys, joka tarjoaa
     maankäytönsuunnitteluun liittyvää asiantuntijapalvelua koko Suomessa.
     Asiakkaita ovat kunnat, valtionhallinto, aluehallinto sekä yksityiset toimijat.
   </p>
-
-  <h2>Palvelut</h2>
-  <ul>
-    <li><strong>Kaavoitus</strong> — kaavoitusprosessit läpi sujuvasti, havainnollisesti ja vuorovaikutteisesti.</li>
-    <li><strong>Maankäytön digitalisaatio</strong> — kaavoituksen modernisointi ja digitaaliset maankäyttöratkaisut.</li>
-    <li><strong>Vuorovaikutus</strong> — osallistumisen parantaminen digitaalisten alustojen kautta.</li>
-  </ul>
-
-  <p>Yli 50 kaavaprojektia 30+ kunnassa.</p>
+  <p>
+    Lue lisää <a href={`${base}yritysesittely/`}>yrityksestä</a> tai tutustu
+    <a href={`${base}referenssit/`}>referensseihin</a>.
+  </p>
 </BaseLayout>

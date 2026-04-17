@@ -21,6 +21,9 @@ const base = import.meta.env.BASE_URL;
     {description && <meta name="description" content={description} />}
     <title>{title} — PlanDisain</title>
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" />
   </head>
   <body>
     <nav>
@@ -28,7 +31,6 @@ const base = import.meta.env.BASE_URL;
       <a href={`${base}yritysesittely/`}>Yritys</a>
       <a href={`${base}referenssit/`}>Referenssit</a>
       <a href={`${base}projektit/`}>Projektit</a>
-      <a href={`${base}blogi/`}>Blogi</a>
       <a href={`${base}yhteystiedot/`}>Yhteystiedot</a>
     </nav>
 
