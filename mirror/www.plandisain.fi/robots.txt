@@ -1,0 +1,28 @@
+Sitemap: https://www.plandisain.fi/sitemap.xml
+
+User-agent: NerdyBot
+Disallow: /
+
+User-agent: dotbot
+Crawl-delay: 10
+
+User-agent: *
+Disallow: /ajax/
+Disallow: /apps/
+Disallow: /ap_kaavamaarayskokoelma.html
+Disallow: /maarayskok.html
+Disallow: /ap_puujoen_rak.html
+Disallow: /ap_vooka_es.html
+Disallow: /ap_kuusisaari.html
+Disallow: /heinitaryk_jako.html
+Disallow: /ap_qgis_yk.html
+Disallow: /heisiirto.html
+Disallow: /ap_aurinkor_rak.html
+Disallow: /ap_kyrsyan_ryk.html
+Disallow: /ap_hein_ita_ryk.html
+Disallow: /ap_pyhaj_ryk.html
+Disallow: /ap_qgis_excel_2025.html
+Disallow: /ap_oskati.html
+Disallow: /ap_oravi-jout.html
+Disallow: /ap_ruot.html
+Disallow: /ap_teeri.html
